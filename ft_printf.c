@@ -6,7 +6,7 @@
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 21:33:19 by danisanc          #+#    #+#             */
-/*   Updated: 2022/01/11 23:41:43 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:51:34 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <math.h>
+#include "libftprintf.h"
 
 int ft_numlenhex(unsigned long n)
 {
@@ -30,6 +30,7 @@ int ft_numlenhex(unsigned long n)
     }
     return (i);
 }
+
 
 int ft_numlen(int n)
 {
@@ -205,22 +206,23 @@ char * ft_tohex(unsigned long n)
     hex[s] = '\0';
     return(hex);
 }
-
+void printpointer(unsigned long n)
+{
+    ft_putstr("0x");
+    ft_putstr(ft_tohex(n));
+}
 int	ft_printf(const char *fmt, ...)
 {
-    long x;
 	va_list args;
-    va_list args2;
 	va_start(args, fmt);
 
 	while(*fmt != '\0')
 	{
 		if(*fmt == '%')
 		{
-			if(*(fmt + 1) == '%')
+			if((char)*(fmt + 1) == '%')
 			{
-				char per = '%';
-				write(1, &per , 1);
+                ft_putchar('%');
 				fmt = fmt + 2;
 			}
 			else if(*(fmt + 1) == 'c')
@@ -240,8 +242,7 @@ int	ft_printf(const char *fmt, ...)
 			}
 			else if(*(fmt + 1) == 'p')
 			{
-				ft_putstr("0x");
-				ft_putstr(ft_tohex(va_arg(args, unsigned long)));
+				printpointer(va_arg(args, unsigned long));
 				fmt = fmt + 2;
 			}
 			else if(*(fmt + 1) == 'x')
@@ -254,32 +255,9 @@ int	ft_printf(const char *fmt, ...)
 				ft_putstr(ft_toHEX(va_arg(args, unsigned long)));
 				fmt = fmt + 2;
 			}
-			else if(*(fmt + 1) == 'u')
-			{
-                va_copy(args2, args);
-				if(va_arg(args2, signed int ) < 0)
-                {
-                
-                    x = pow(2, 32) - va_arg(args,  int);
-                    printf("%lu" , x);
-                   
-                }
-                else
-                {
-                    x = va_arg(args,  int) * -1;
-                    ft_putstr(ft_itoa(x));
-                }
-				fmt = fmt + 2;
-                
-			}
-            va_end(args2);
 		}
 		else
-		{
-			ft_putchar(*fmt);
-			fmt++;	
-		}
-	
+			ft_putchar(*fmt++);
 	}
 	return (0);
 	va_end(args);
@@ -288,7 +266,7 @@ int	ft_printf(const char *fmt, ...)
 int	main()
 {
 	int a = 1;
-	ft_printf("miau %c %s %p %% %x %X %i %d %u" , 'a', "abc", &a, 15 , 15, 77 ,  -123, 123);
+	ft_printf("miau %c %s %p %% %x %X %i %d" , 'a', "abc", &a, 15 , 15, 77 ,  -123);
 	printf("\n");
-	printf("miau %c %s %p %% %x %X %i %d %u" , 'a', "abc", &a, 15, 15 , 77, -123 , 123);
+	printf("miau %c %s %p %% %x %X %i %d" , 'a', "abc", &a, 15, 15 , 77, -123);
 }

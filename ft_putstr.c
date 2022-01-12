@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.c                                           :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 17:25:30 by danisanc          #+#    #+#             */
-/*   Updated: 2022/01/12 17:29:40 by danisanc         ###   ########.fr       */
+/*   Created: 2021/11/24 12:10:30 by danisanc          #+#    #+#             */
+/*   Updated: 2022/01/11 00:42:47 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <unistd.h>
 
-void	ft_putchar(char c)
+void ft_putstr(char *s)
 {
-	write(1, &c, 1);
+    while(*s != '\0')
+    {
+        write(1, s, 1);
+        s++;
+    }
 }

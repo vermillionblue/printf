@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.c                                           :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 17:25:30 by danisanc          #+#    #+#             */
-/*   Updated: 2022/01/12 17:29:40 by danisanc         ###   ########.fr       */
+/*   Created: 2022/01/12 17:15:26 by danisanc          #+#    #+#             */
+/*   Updated: 2022/01/12 17:24:43 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#ifndef LIBFT_H
+# define LIBFT_H
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+#include <stdarg.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdint.h>
+
+int 	ft_numlenhex(unsigned long n);
+void	ft_putchar(char c);
+
+
+#endif
