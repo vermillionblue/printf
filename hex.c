@@ -6,15 +6,13 @@
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:38:52 by danisanc          #+#    #+#             */
-/*   Updated: 2022/01/12 17:39:54 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/01/27 22:11:23 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "ft_printf.h"
 
-int ft_numlen(unsigned long n)
+int ft_numlenhex(unsigned long n)
 {
     int i;
 
@@ -27,13 +25,14 @@ int ft_numlen(unsigned long n)
     return (i);
 }
 
-char * ft_tohex(unsigned long n)
+char *ft_tohex(unsigned long n)
 {
     int k;
     int rem;
-    char * hex;
+    char *hex;
+    char x;
 
-    k = ft_numlen(n);
+    k = ft_numlenhex(n);
     int s=k;
     hex = malloc(k + 1);
     if (hex == NULL)
@@ -44,16 +43,14 @@ char * ft_tohex(unsigned long n)
         n = n / 16;
         if(rem >= 0 && rem <= 9)
         {
-            hex[k - 1] = *ft_itoa(rem);
+            x = *ft_itoa(rem);
+             hex[k - 1] = x;
         }
+           
         if (rem == 10)
-        {
             hex[k - 1] = 'a'; 
-        }
         if (rem == 11)
-        {
             hex[k - 1] = 'b'; 
-        }
         if (rem == 12)
         {
             hex[k - 1] = 'c'; 

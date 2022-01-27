@@ -6,13 +6,14 @@
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:25:30 by danisanc          #+#    #+#             */
-/*   Updated: 2022/01/12 17:29:40 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/01/27 20:07:14 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void	ft_putchar(char c)
+int	ft_putchar(char c)
 {
 	write(1, &c, 1);
+	return (1);
 }

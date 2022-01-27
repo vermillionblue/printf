@@ -6,34 +6,31 @@
 #    By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/12 17:10:46 by danisanc          #+#    #+#              #
-#    Updated: 2022/01/12 17:31:18 by danisanc         ###   ########.fr        #
+#    Updated: 2022/01/27 20:00:07 by danisanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME= libftprintf.a
+NAME = libftprintf.a
 
-CC= gcc
+SRCS = address.c decimal.c ft_putstr.c  string.c hex.c printu.c ft_printf.c
 
-CFLAGS= -Wall -Wextra -Werror -I.
+OBJS = $(SRCS:.c=.o)
 
-SRCS= address.c ft_printf.c decimal.c hex.c printu.c string.c
+CC = gcc
 
-OBJS= $(SRCS:.c=.o)
-
+CFLAGS = -Werror -Wextra -Wall
 
 $(NAME): $(OBJS)
-	ar rcs $@ $^
-	 
-bonus: $(OBJS) $(OBJSPLUS)
-	ar rcs $(NAME) $^
+	ar rcs $(NAME) $(OBJS)
 
 all: $(NAME)
 
-.PHONY : clean
 clean:
-	rm $(OBJS) $(OBJSPLUS)
+	rm -f $(OBJS)
 
 fclean: clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
