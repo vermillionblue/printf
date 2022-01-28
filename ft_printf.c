@@ -6,7 +6,7 @@
 /*   By: danisanc <danisanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 21:33:19 by danisanc          #+#    #+#             */
-/*   Updated: 2022/01/27 21:03:03 by danisanc         ###   ########.fr       */
+/*   Updated: 2022/01/29 00:32:53 by danisanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 void	checkfmts(va_list args, const char *fmt, int* totallen)
 {
+	char *p;
 	if((char)*(fmt + 1) == '%')
 		*totallen += ft_putchar('%');
 	else if(*(fmt + 1) == 'c')
@@ -30,7 +31,13 @@ void	checkfmts(va_list args, const char *fmt, int* totallen)
 	else if(*(fmt + 1) == 'd' || *(fmt + 1) == 'i')
 		*totallen += ft_putstr(ft_itoa(va_arg(args, int)));
 	else if(*(fmt + 1) == 'p')
-		*totallen += printpointer(va_arg(args, unsigned long));
+	{
+		p = ft_tohex(va_arg(args, unsigned long));
+    	*totallen += ft_putstr("0x");
+    	*totallen += ft_putstr(p);
+    	free(p);
+	}
+		
 	else if(*(fmt + 1) == 'x')
 		*totallen += ft_putstr(ft_tohex(va_arg(args, unsigned long)));
 	else if(*(fmt + 1) == 'X')
